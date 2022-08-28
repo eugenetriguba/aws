@@ -15,4 +15,4 @@ Use cases
   * Real-time dashboards (leader boards for games)
   * Real-time metrics (security and response teams)
 
-![Kinesis-Data-Analytics.png](Images/Kinesis-Data-Analytics.png)
+![Kinesis-Data-Analytics.png](../Images/Kinesis-Data-Analytics.png)
