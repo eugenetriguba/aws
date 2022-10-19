@@ -14,6 +14,13 @@ Allows you to gain access to hosts dedicated for your use which you can then use
   - Dictates how many instances can be running on that host
   - Software which is licensed based on physical sockets or cores can utilize this visibility of the hardware.
 
+- AMI limits: RHEL, SUSE Linux, and Windows AMIs aren't supported.
+- Amazon RDS instances are not supported.
+- Placement groups are not supported for dedicated hosts.
+- Hosts can be shared with other ORG accounts (RAM product, resource access manager).
+  - You can see all the instances but can only control the instances you create. With other accounts who get that host shared with them, they can only see instances that they create.
+
 ## Use case
 
 Generally, this is used for applications which use software that have physical core/socket licensing.
+
