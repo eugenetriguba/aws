@@ -1,3 +1,5 @@
+# DNS
+
 Domain name system (DNS): A discovery service
 
 * Translates things a machine needs into what a human needs and vice versa. i.e. URL to IP address
@@ -6,6 +8,71 @@ Domain name system (DNS): A discovery service
 * Order of magnitudes more IPv6 addresses.
 
 Computers don't work with domain names. They work with IP addresses. The names are resolved to the actual IP addresses we need.
+
+The job of DNS is to help you locate and get a query response from the authoritative zone which hosts the DNS record(s) you need.
+
+## Why not ONE DNS server?
+
+### Risk
+
+One small group of bad actors could compromise the DNS infrastructure.
+
+### Scaling
+
+Almost everyone who uses the internet uses DNS globally. A server can only get so big.
+
+### Data Volume
+
+Estimates predict there are currently around ~341 million domains and each domain has many records.
+
+Because of the large dataset, parts of the dataset are delegated to certain entities.
+
+## Key Terms
+
+- DNS Zone: a database e.g. \*.netflix.com containing records.
+
+- ZoneFile: The "file" storing the zone on disk.
+
+- Name Server (NS): A DNS server which hosts 1 or more Zones and stores 1 or more ZoneFiles.
+
+- Authoritative: Contains real or genuine records. e.g. one or more NSs may be able to give the real records for \*.netflix.com.
+
+- Non-Authoritative/cached: Copies of records/zones stored elsewhere to speed things up.
+
+## Hierarchical Design
+
+DNS Root 
+- Runs on DNS root servers
+- Point that every DNS client knows about and trust
+- All queries start at the root
+- 13 root server IP addreses that host the root zone and the hardware is managed by independent organizations.
+- ICANN, NASA, Verisign, and so on hosts one of these.
+  - In reality, these IP addresses don't point to one single server.
+- Management of the root zone and root servers that host the root zone is different.
+- Root zone contains high level information on TLDs, no details.
+
+## Walking the tree
+
+1. Check the local cache and Hosts file
+2. Queries Resolver (DNS Resolver, queries for you)
+3. Resolver will check it's own local cache
+4. If not found, asks Root, for example, www.netflix.com
+5. Root zone contains NS records for `.com` Registry NS IPs.
+6. Returns .com NS
+7. Resolver queries .com TLD NS for www.netflix.com
+8. .com TLD delegates to netflix.com NS and gives back the netflix.com NS IPs
+9. Returns netflix.com NS
+10. Asks netflix.com NS for www.netflix.com
+11. Returns DNS record for www.netflix.com IP
+12. Resolver caches the result to improve performance for future queries
+
+No one NS has all the answers, but every query gives you the next step. This process, end to end, is called "walking the tree".
+
+## Registering a new domain
+
+- Registrar and hosting provider can be the same or different companies.
+-   
+
 
 Zone file:
 
